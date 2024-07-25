@@ -1,5 +1,5 @@
 local gid = game.PlaceId
-local gnm = game:GetService("MarketplaceService"):GetProductInfo(gameId).Name
+local gnm = game:GetService("MarketplaceService"):GetProductInfo(gid).Name
 
 if gid == 4924922222 then -- brookhaven
   print("Game detected: "..gnm)
