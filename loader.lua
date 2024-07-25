@@ -7,6 +7,5 @@ elseif gid == 142823291 then -- mm2
   print("Game detected: "..gnm)
 elseif gid == 301549746 then -- cb
   print("Game detected: "..gnm)
-elseif gid == 2534724415 then -- erlc
-  print("Game detected: "..gnm)
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/laixy1337/LaixCC/main/cb.lua"))
 end
