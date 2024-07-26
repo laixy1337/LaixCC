@@ -848,7 +848,7 @@ RunService.RenderStepped:Connect(function()
 	        local textLabel = Instance.new("TextLabel")
 	        textLabel.Size = UDim2.new(1, 0, 1, 0)
 	        textLabel.BackgroundTransparency = 1
-	        textLabel.Text = Player.Name
+	        textLabel.Text = Player.Character.Name
 	        textLabel.TextColor3 = Color3.new(1, 1, 1)
 	        textLabel.TextScaled = true
 	        textLabel.Parent = billboardGui
