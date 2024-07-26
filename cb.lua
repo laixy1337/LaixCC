@@ -853,7 +853,7 @@ RunService.RenderStepped:Connect(function()
 	        textLabel.TextScaled = true
 	        textLabel.Parent = billboardGui
 	
-	        billboardGui.Parent = Player.Character:WaitForChild("Head")
+	        billboardGui.Parent = Player.Character
 					
 		if ESPSettings.UseTeamColor == true then
 			if Player.Character:FindFirstChild("Highlight") then
