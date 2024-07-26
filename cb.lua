@@ -35,6 +35,7 @@ local AimSettings = {
 
 local ESPSettings = {
     Enabled = false,
+    NameChams = false,
     UseTeamColor = false,
     ChamsColor = Color3.fromRGB(200,200,200)
 }
@@ -494,6 +495,15 @@ if true then
             end,
         })
 
+	Visuals:CreateToggle({
+            Name = "Name Chams",
+            CurrentValue = false,
+            Flag = "NameChams",
+            Callback = function(Value)
+                ESPSettings.NameChams = Value
+            end,
+        })
+	
         Visuals:CreateToggle({
             Name = "Use Team Color",
             CurrentValue = false,
@@ -829,21 +839,38 @@ end)
 RunService.RenderStepped:Connect(function()
     for _, Player in ipairs(Players:GetChildren()) do
         if ESPSettings.Enabled == true then
-            if ESPSettings.UseTeamColor == true then
-                if Player.Character:FindFirstChild("Highlight") then
-                    Player.Character.Highlight.FillColor = Player.TeamColor.Color
-                else
-                    local Highlight = Instance.new("Highlight", Player.Character)
-                    Highlight.FillColor = Player.TeamColor.Color
-                end
-            else
-                if Player.Character:FindFirstChild("Highlight") then
-                    Player.Character.Highlight.FillColor = ESPSettings.ChamsColor or Color3.fromRGB(200,200,200)
-                else
-                    local Highlight = Instance.new("Highlight", Player.Character)
-                    Highlight.FillColor = ESPSettings.ChamsColor or Color3.fromRGB(200,200,200)
-                end
-            end
+	    if ESPSettings.NameChams == true then
+	        local billboardGui = Instance.new("BillboardGui")
+	        billboardGui.Size = UDim2.new(0, 200, 0, 50)
+	        billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+	        billboardGui.AlwaysOnTop = true
+	
+	        local textLabel = Instance.new("TextLabel")
+	        textLabel.Size = UDim2.new(1, 0, 1, 0)
+	        textLabel.BackgroundTransparency = 1
+	        textLabel.Text = player.Name
+	        textLabel.TextColor3 = Color3.new(1, 1, 1)
+	        textLabel.TextScaled = true
+	        textLabel.Parent = billboardGui
+	
+	        billboardGui.Parent = Player.Character:WaitForChild("Head")
+					
+		if ESPSettings.UseTeamColor == true then
+			if Player.Character:FindFirstChild("Highlight") then
+			    Player.Character.Highlight.FillColor = Player.TeamColor.Color
+			else
+			    local Highlight = Instance.new("Highlight", Player.Character)
+			    Highlight.FillColor = Player.TeamColor.Color
+			end
+		else
+			if Player.Character:FindFirstChild("Highlight") then
+			    Player.Character.Highlight.FillColor = ESPSettings.ChamsColor or Color3.fromRGB(200,200,200)
+			else
+			    local Highlight = Instance.new("Highlight", Player.Character)
+			    Highlight.FillColor = ESPSettings.ChamsColor or Color3.fromRGB(200,200,200)
+			end
+		end
+	    end
         else
             if Player.Character:FindFirstChild("Highlight") then
                 Player.Character.Highlight:Destroy()
